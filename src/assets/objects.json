@@ -1,0 +1,50 @@
+[
+    {
+      "path": "batman",
+      "file": "batman.gif",
+      "name": "Batman",
+      "next": "/moedas"
+    },
+    {
+      "path": "moedas",
+      "file": "moedas.gif",
+      "name": "Moedas",
+      "next": "/caminhao"
+    },
+    {
+      "path": "caminhao",
+      "file": "caminhao.gif",
+      "name": "Caminhão",
+      "next": "/bola_futebol"
+    },
+    {
+      "path": "bola_futebol",
+      "file": "bola_futebol.gif",
+      "name": "Bola de Futebol",
+      "next": "/youtube"
+    },
+    {
+      "path": "youtube",
+      "file": "youtube.gif",
+      "name": "YouTube",
+      "next": "/slime"
+    },
+    {
+      "path": "pintar",
+      "file": "pintar.gif",
+      "name": "Pintar",
+      "next": "/slime"
+    },
+    {
+      "path": "slime",
+      "file": "slime.png",
+      "name": "Slime",
+      "next": "/minecraft"
+    },
+    {
+      "path": "minecraft",
+      "file": "minecraft.gif",
+      "name": "Minecraft",
+      "next": "/escolha"
+    }
+  ]

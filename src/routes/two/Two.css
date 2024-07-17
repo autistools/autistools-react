@@ -1,0 +1,18 @@
+#two-el {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+}
+.two-question {
+  font-family: "Inter", sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 58.09px;
+  text-align: center;
+  color: #424242;
+  margin-bottom: -1rem;
+}
+.two-question-div {
+    margin-bottom: 5rem;
+}

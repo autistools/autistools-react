@@ -1,0 +1,17 @@
+#msg-el {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: flex-start;
+}
+.msg-question {
+  font-family: "Inter", sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 58.09px;
+  text-align: center;
+  color: #424242;
+  margin-bottom: -1rem;
+  padding-right: 10%;
+  padding-left: 10%;
+}

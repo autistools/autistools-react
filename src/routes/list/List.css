@@ -1,0 +1,43 @@
+#list-el {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-items: flex-start;
+  flex: 1;
+  width: 100vw;
+}
+#list-head-tit {
+  margin-left: 5vw;
+  margin-bottom: 30px;
+}
+.list-question {
+  font-family: "League Spartan", sans-serif;
+  font-size: 38px;
+  font-weight: 500;
+  line-height: 44.16px;
+  word-wrap: break-word;
+}
+.list-bar {
+  margin-top: 5px;
+  height: 5px;
+  background-color: #91cc8b;
+  width: 80px;
+}
+#list-cards-el {
+  margin: auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  word-wrap: break-word;
+  padding: 0 5rem 0 5rem;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+@media screen and (min-width: 800px) {
+  #list-cards-el {
+    width: 900px;
+  }
+}
