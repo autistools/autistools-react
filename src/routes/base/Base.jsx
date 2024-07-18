@@ -26,7 +26,7 @@ export default function Base() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate("/lista");
+    navigate("/tabela");
   }, [navigate]);
 
   const audioElement = () => document.getElementById("audio-element");
@@ -59,7 +59,7 @@ export default function Base() {
         >
           <source src={audios["idade"]} type="audio/mpeg" />
         </audio>
-        <h1 className="app-name">AspieTool</h1>
+        <h1 className="app-name">AutisTools</h1>
         <a href="https://juntos.art.br/" target="_blank" rel="noreferrer">
           <img
             className="juntos-logo"

@@ -8,6 +8,7 @@ import Object from "./routes/object/Object";
 import List from "./routes/list/List";
 import Two from "./routes/two/Two";
 import Great from "./routes/great/Great";
+import Table from "./routes/table/Table";
 
 import objects from './assets/objects.json'
 
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "otimo",
         element: <Great/>
+      },
+      {
+        path: 'tabela',
+        element: <Table/>
       }
     ],
   },

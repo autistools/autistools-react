@@ -13,7 +13,18 @@ export default function Name() {
 
   useEffect(() => {
     nameRef.current.focus();
-  }, []);
+    if (document.getElementById('name-input')) {
+      document.getElementById('name-input').addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          if (name) {
+            document.getElementById('name-el').classList.add('slide-out');
+            setTimeout(() => navigate('/descricao'), 1000);
+          }
+        }
+      })
+    }
+  }, [nameRef, name, navigate]);
   
   function goToNextRoute() {
     if (name) {

@@ -10,9 +10,13 @@ export default function Message({phrase, next, milli=5000}) {
 
   useEffect(() => {
     setTimeout(() => {
-      document.getElementById('msg-el').classList.add('slide-out');
+      if (document.getElementById('msg-el')) {
+        document.getElementById('msg-el').classList.add('slide-out');
+      }
       setTimeout(() => {
-        document.getElementById('msg-el').classList.remove('slide-out');
+        if (document.getElementById('msg-el')) {
+          document.getElementById('msg-el').classList.remove('slide-out');
+        }
         navigate(next, {
           state: location.state
         });

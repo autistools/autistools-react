@@ -27,7 +27,7 @@
       "path": "youtube",
       "file": "youtube.gif",
       "name": "YouTube",
-      "next": "/slime"
+      "next": "/pintar"
     },
     {
       "path": "pintar",

@@ -13,12 +13,22 @@ export default function Two() {
 
   useEffect(() => {
     if (two.length < 2) {
-      let rand1 = null, rand2 = null;
-      while ((rand1 = parseInt(Math.random() * objects.length)) === location.state.forbidden );
-      while ((rand2 = parseInt(Math.random() * objects.length)) === rand1 || rand2 === location.state.forbidden);
+      let rand1 = null,
+        rand2 = null;
+      while (
+        (rand1 = parseInt(Math.random() * objects.length)) ===
+        location.state.forbidden
+      );
+      while (
+        (rand2 = parseInt(Math.random() * objects.length)) === rand1 ||
+        rand2 === location.state.forbidden
+      );
       two.push(objects[rand1], objects[rand2]);
+      location.state.couples.push(`${rand1} ${rand2}`);
+      location.state.objectsTable[objects[rand1].name]++;
+      location.state.objectsTable[objects[rand2].name]++;
     }
-  }, [two, location.state.forbidden]);
+  }, [two, location.state]);
 
   useEffect(() => {
     if (two.length === 2) {
@@ -34,7 +44,10 @@ export default function Two() {
     document.getElementById("two-el").classList.add("slide-out");
     setTimeout(() => {
       navigate("/otimo", {
-        state: favorite ,
+        state: {
+          ...favorite,
+          ...location.state
+        },
       });
     }, 1000);
   }
@@ -46,13 +59,21 @@ export default function Two() {
       </div>
       <ul id="list-cards-el">
         {two.length === 2
-          ? two.slice(0, index).map(({ file, name : localName}) => (
+          ? two.slice(0, index).map(({ file, name: localName }) => (
               <li className="slide-in" key={localName}>
                 <Object
                   file={file}
                   name={localName}
                   clickable={clickable}
-                  onClick={() => chooseFavorite({ file: file, name: localName, index: objects.findIndex(({name}) => name === localName) })}
+                  onClick={() =>
+                    chooseFavorite({
+                      file: file,
+                      name: localName,
+                      index: objects.findIndex(
+                        ({ name }) => name === localName
+                      )
+                    })
+                  }
                   navigable={false}
                 />
               </li>

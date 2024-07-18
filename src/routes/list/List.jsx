@@ -6,7 +6,7 @@ import Object from "../object/Object";
 
 export default function List() {
   const navigate = useNavigate();
-  const [index, setIndex] = useState(1)
+  const [index, setIndex] = useState(1);
   const [clickable, setClickable] = useState(false);
 
   useEffect(() => {
@@ -18,10 +18,23 @@ export default function List() {
   }, [index]);
 
   function chooseFavorite(favorite) {
-    document.getElementById('list-el').classList.add('slide-out');
+    if (document.getElementById("list-el")) {
+      document.getElementById("list-el").classList.add("slide-out");
+    }
+    const objectsTable = {};
+    for (let object of objects) {
+      objectsTable[object.name] = 0;
+      if (object.name === favorite.name) {
+        objectsTable[object.name]++;
+      }
+    }
     setTimeout(() => {
-      navigate('/preparacao', {
-        state: { forbidden: favorite}
+      navigate("/preparacao", {
+        state: {
+          forbidden: favorite.index,
+          couples: [],
+          objectsTable: objectsTable
+        }
       });
     }, 1000);
   }
@@ -33,14 +46,19 @@ export default function List() {
         <div className="list-bar"></div>
       </div>
       <ul id="list-cards-el">
-        {objects.slice(0, index).map(({ file, name, next }, index) => (
-          <li className="slide-in" key={name}>
+        {objects.slice(0, index).map(({ file, name: localName, next }) => (
+          <li className="slide-in" key={localName}>
             <Object
               file={file}
-              name={name}
+              name={localName}
               next={next}
               clickable={clickable}
-              onClick={() => chooseFavorite(index - 1)}
+              onClick={() =>
+                chooseFavorite({
+                  name: localName,
+                  index: objects.findIndex(({ name }) => name === localName),
+                })
+              }
               navigable={false}
             />
           </li>
