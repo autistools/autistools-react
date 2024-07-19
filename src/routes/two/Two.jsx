@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Two.css";
 import objects from "../../assets/objects.json";
-import Object from "../object/Object";
+import Card from "../card/Card";
 import { useNavigate, useLocation } from "react-router";
 
 export default function Two() {
@@ -25,8 +25,6 @@ export default function Two() {
       );
       two.push(objects[rand1], objects[rand2]);
       location.state.couples.push(`${rand1} ${rand2}`);
-      location.state.objectsTable[objects[rand1].name]++;
-      location.state.objectsTable[objects[rand2].name]++;
     }
   }, [two, location.state]);
 
@@ -41,13 +39,17 @@ export default function Two() {
   }, [index, two]);
 
   function chooseFavorite(favorite) {
-    document.getElementById("two-el").classList.add("slide-out");
+    if (document.getElementById("two-el")) {
+      document.getElementById("two-el").classList.add("slide-out");
+    }
+    location.state.objectsTable[favorite.name]++;
     setTimeout(() => {
       navigate("/otimo", {
         state: {
           ...favorite,
           ...location.state
         },
+        replace: true
       });
     }, 1000);
   }
@@ -61,7 +63,7 @@ export default function Two() {
         {two.length === 2
           ? two.slice(0, index).map(({ file, name: localName }) => (
               <li className="slide-in" key={localName}>
-                <Object
+                <Card
                   file={file}
                   name={localName}
                   clickable={clickable}

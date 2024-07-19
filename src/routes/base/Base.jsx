@@ -26,7 +26,7 @@ export default function Base() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate("/tabela");
+    navigate("/lista", { replace: true });
   }, [navigate]);
 
   const audioElement = () => document.getElementById("audio-element");

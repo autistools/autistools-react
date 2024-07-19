@@ -18,7 +18,8 @@ export default function Message({phrase, next, milli=5000}) {
           document.getElementById('msg-el').classList.remove('slide-out');
         }
         navigate(next, {
-          state: location.state
+          state: location.state,
+          replace: true
         });
       }, 1000);
     }, milli);

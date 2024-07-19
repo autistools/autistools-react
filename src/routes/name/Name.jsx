@@ -19,7 +19,7 @@ export default function Name() {
           event.preventDefault();
           if (name) {
             document.getElementById('name-el').classList.add('slide-out');
-            setTimeout(() => navigate('/descricao'), 1000);
+            setTimeout(() => navigate('/descricao', { replace: true }), 1000);
           }
         }
       })
@@ -29,7 +29,7 @@ export default function Name() {
   function goToNextRoute() {
     if (name) {
       document.getElementById('name-el').classList.add('slide-out');
-      setTimeout(() => navigate('/descricao'), 1000);
+      setTimeout(() => navigate('/descricao', { replace: true }), 1000);
     }
   }
 

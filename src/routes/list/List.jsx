@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import "./List.css";
 import objects from "../../assets/objects.json";
-import Object from "../object/Object";
+import Card from "../card/Card";
 
 export default function List() {
   const navigate = useNavigate();
@@ -34,7 +34,8 @@ export default function List() {
           forbidden: favorite.index,
           couples: [],
           objectsTable: objectsTable
-        }
+        },
+        replace: true
       });
     }, 1000);
   }
@@ -48,7 +49,7 @@ export default function List() {
       <ul id="list-cards-el">
         {objects.slice(0, index).map(({ file, name: localName, next }) => (
           <li className="slide-in" key={localName}>
-            <Object
+            <Card
               file={file}
               name={localName}
               next={next}

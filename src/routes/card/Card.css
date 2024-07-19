@@ -1,10 +1,10 @@
-#obj-el {
+#card-el {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
 }
-#obj-card {
+#card-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@
   box-shadow: 0px 4px 4px 0px #5f995940;
   padding: 1rem;
 }
-#obj-card:hover {
+#card-div:hover {
   background-color: #CAFFC5;
 }
 #inner-box {
@@ -35,7 +35,7 @@
   width: 50px;
   height: 50px;
 }
-.obj-name-ident {
+.card-name-ident {
   font-family: "League Spartan", sans-serif;
   font-size: 28px;
   font-weight: 500;

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import "./Object.css";
+import "./Card.css";
 
-export default function Object({
+export default function Card({
   file,
   name,
   next=null,
@@ -16,26 +16,30 @@ export default function Object({
   useEffect(() => {
     if (next && navigable) {
       setTimeout(() => {
-        document.getElementById('obj-el').classList.add('slide-out');
+        if (document.getElementById('card-el')) {
+          document.getElementById('card-el').classList.add('slide-out');
+        }
         setTimeout(() => {
-          document.getElementById('obj-el').classList.remove('slide-out');
-          navigate(next);
+          if (document.getElementById('card-el')) {
+            document.getElementById('card-el').classList.remove('slide-out');
+          }
+          navigate(next, { replace: true });
         }, 1000);
       }, millis);
     }
   }, [next, navigable, millis, navigate]);
 
   return (
-    <div id="obj-el" className="slide-in">
+    <div id="card-el" className="slide-in">
       <div
-        id="obj-card"
+        id="card-div"
         style={
           clickable
             ? {
                 cursor: "pointer",
               }
             : {
-              cursor: 'default'
+              cursor: "default"
             }
         }
         onClick={() => {
@@ -51,7 +55,7 @@ export default function Object({
             className="anim-img"
           />
         </div>
-        <span className="obj-name-ident">{name}</span>
+        <span className="card-name-ident">{name}</span>
       </div>
     </div>
   );

@@ -1,19 +1,19 @@
 import React from "react";
 import "./Great.css";
-import Object from "../object/Object";
+import Card from "../card/Card";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import { BsArrowRightCircleFill } from "react-icons/bs";
-import objects from "../../assets/objects.json";
+// import objects from "../../assets/objects.json";
 
 export default function Great() {
-  const MAX_COUPLES = parseInt(objects.length * (objects.length - 1) / 2);
+  // const MAX_COUPLES = parseInt(objects.length * (objects.length - 1) / 2);
+  
+  const MAX_COUPLES = 5;
 
   const navigate = useNavigate();
 
   const location = useLocation();
-
-  console.log(location.state);
 
   // function isFinished(couples) {
   //   const numbers = objects.map((_, index) => index);
@@ -35,8 +35,9 @@ export default function Great() {
       document.getElementById("great-el").classList.add("slide-out");
     }
     if (location.state.couples.length === MAX_COUPLES) {
-      navigate("/tabela", {
+      navigate("/preferido", {
         state: location.state,
+        replace: true
       });
     } else {
       navigate("/dois", {
@@ -45,6 +46,7 @@ export default function Great() {
           couples: location.state.couples,
           objectsTable: location.state.objectsTable 
         },
+        replace: true
       });
     }
   }
@@ -56,7 +58,7 @@ export default function Great() {
       </div>
       <ul id="list-cards-el">
         <li className="list-cards-li slide-in" key={location.state.name}>
-          <Object
+          <Card
             file={location.state.file}
             name={location.state.name}
             clickable={false}

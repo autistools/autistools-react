@@ -4,13 +4,14 @@ import Base from "./routes/base/Base";
 import Age from "./routes/age/Age";
 import Name from "./routes/name/Name";
 import Message from "./routes/message/Message";
-import Object from "./routes/object/Object";
+import Card from "./routes/card/Card";
 import List from "./routes/list/List";
 import Two from "./routes/two/Two";
 import Great from "./routes/great/Great";
 import Table from "./routes/table/Table";
+import Favorite from "./routes/favorite/Favorite";
 
-import objects from './assets/objects.json'
+import objects from "./assets/objects.json";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       ...objects.map(({ path, file, name, next }) => {
         return {
           path: path,
-          element: <Object file={file} name={name} next={next}/>,
+          element: <Card file={file} name={name} next={next} />,
         };
       }),
       {
@@ -65,23 +66,30 @@ const router = createBrowserRouter([
         element: <List />,
       },
       {
-        path: 'preparacao',
+        path: "preparacao",
         element: (
-          <Message phrase={'Agora, escolha entre dois objetos'} next={'/dois'}/>
-        )
+          <Message
+            phrase={"Agora, escolha entre dois objetos"}
+            next={"/dois"}
+          />
+        ),
       },
       {
         path: "dois",
-        element: <Two/>
+        element: <Two />,
       },
       {
         path: "otimo",
-        element: <Great/>
+        element: <Great />,
       },
       {
-        path: 'tabela',
-        element: <Table/>
-      }
+        path: "preferido",
+        element: <Favorite />,
+      },
+      {
+        path: "tabela",
+        element: <Table />,
+      },
     ],
   },
 ]);
