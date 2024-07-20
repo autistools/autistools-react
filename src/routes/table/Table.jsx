@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Table.css";
-import objects from "../../assets/objects.json";
 import { useLocation } from "react-router";
 import { BsDownload, BsClipboard, BsClipboardCheck } from "react-icons/bs";
 import * as XLSX from "xlsx";
@@ -72,12 +71,15 @@ export default function Table() {
     setTimeout(() => setDownloadTableClicked(false), 2000);
   }
 
-  const EVENTS = parseInt((objects.length * (objects.length - 1)) / 2) + 1;
-
   useEffect(() => {
     setSortedObjectsTable(
       Object.keys(location.state.objectsTable)
-        .map((val) => [val, location.state.objectsTable[val]])
+        .map((val) => [
+          val,
+          (location.state.objectsTable[val].chosen /
+            location.state.objectsTable[val].showed) *
+            100,
+        ])
         .sort((val1, val2) => val2[1] - val1[1])
         .map((val) => {
           return { [val[0]]: val[1] };
@@ -86,12 +88,12 @@ export default function Table() {
   }, [location.state.objectsTable]);
 
   function doAgain() {
-    window.history.replaceState({}, '');
+    window.history.replaceState({}, "");
     if (document.getElementById("tab-el")) {
       document.getElementById("tab-el").classList.add("slide-out");
     }
     navigate("/idade", {
-      replace: true
+      replace: true,
     });
   }
 
@@ -119,7 +121,7 @@ export default function Table() {
                   <td className="f1">{index + 1}</td>
                   <td className="f5">{Object.keys(obj)[0]}</td>
                   <td className="f3">
-                    {((obj[Object.keys(obj)[0]] / EVENTS) * 100).toFixed(2)} %
+                    {obj[Object.keys(obj)[0]].toFixed(2)} %
                   </td>
                 </tr>
               ))}

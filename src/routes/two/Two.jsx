@@ -10,21 +10,33 @@ export default function Two() {
   const [two] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+  const [tout, settout] = useState(null);
 
   useEffect(() => {
     if (two.length < 2) {
-      let rand1 = null,
-        rand2 = null;
-      while (
-        (rand1 = parseInt(Math.random() * objects.length)) ===
-        location.state.forbidden
+      // let rand1 = null,
+      //   rand2 = null;
+      // while (
+      //   (rand1 = parseInt(Math.random() * objects.length)) ===
+      //   location.state.forbidden
+      // );
+      // while (
+      //   (rand2 = parseInt(Math.random() * objects.length)) === rand1 ||
+      //   rand2 === location.state.forbidden
+      // );
+      // two.push(objects[rand1], objects[rand2]);
+      // location.state.couples.push(`${rand1} ${rand2}`);
+      let couple = location.state.couples.find(
+        ({ couple, available }) =>
+          couple.indexOf(location.state.forbidden) === -1 && available
       );
-      while (
-        (rand2 = parseInt(Math.random() * objects.length)) === rand1 ||
-        rand2 === location.state.forbidden
-      );
-      two.push(objects[rand1], objects[rand2]);
-      location.state.couples.push(`${rand1} ${rand2}`);
+      if (!couple) {
+        couple = location.state.couples.find(({ available }) => available);
+      }
+      couple.available = false;
+      two.push(objects[couple.couple[0]], objects[couple.couple[1]]);
+      location.state.objectsTable[objects[couple.couple[0]].name].showed++;
+      location.state.objectsTable[objects[couple.couple[1]].name].showed++;
     }
   }, [two, location.state]);
 
@@ -34,22 +46,33 @@ export default function Two() {
         setTimeout(() => setIndex(index + 1), 1000);
       } else {
         setClickable(true);
+        settout(
+          setTimeout(() => {
+            navigate("/ausencia", {
+              replace: true,
+              state: location.state,
+            });
+          }, 16000)
+        );
       }
     }
-  }, [index, two]);
+  }, [index, two, navigate, location.state]);
 
   function chooseFavorite(favorite) {
     if (document.getElementById("two-el")) {
       document.getElementById("two-el").classList.add("slide-out");
     }
-    location.state.objectsTable[favorite.name]++;
+    location.state.objectsTable[favorite.name].chosen++;
     setTimeout(() => {
+      if (tout) {
+        clearTimeout(tout);
+      }
       navigate("/otimo", {
         state: {
           ...favorite,
-          ...location.state
+          ...location.state,
         },
-        replace: true
+        replace: true,
       });
     }, 1000);
   }
@@ -73,7 +96,7 @@ export default function Two() {
                       name: localName,
                       index: objects.findIndex(
                         ({ name }) => name === localName
-                      )
+                      ),
                     })
                   }
                   navigable={false}

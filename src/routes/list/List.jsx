@@ -21,21 +21,33 @@ export default function List() {
     if (document.getElementById("list-el")) {
       document.getElementById("list-el").classList.add("slide-out");
     }
+    const couples = [];
+    for (let i = 0; i < objects.length - 1; i++) {
+      for (let j = i + 1; j < objects.length; j++) {
+        couples.push({
+          couple: [i, j],
+          available: true,
+        });
+      }
+    }
     const objectsTable = {};
     for (let object of objects) {
-      objectsTable[object.name] = 0;
+      objectsTable[object.name] = {
+        chosen: 0,
+        showed: 1,
+      };
       if (object.name === favorite.name) {
-        objectsTable[object.name]++;
+        objectsTable[object.name].chosen++;
       }
     }
     setTimeout(() => {
       navigate("/preparacao", {
         state: {
           forbidden: favorite.index,
-          couples: [],
-          objectsTable: objectsTable
+          couples: couples,
+          objectsTable: objectsTable,
         },
-        replace: true
+        replace: true,
       });
     }, 1000);
   }

@@ -9,7 +9,7 @@ import { BsArrowRightCircleFill } from "react-icons/bs";
 export default function Great() {
   // const MAX_COUPLES = parseInt(objects.length * (objects.length - 1) / 2);
   
-  const MAX_COUPLES = 5;
+  // const MAX_COUPLES = 5;
 
   const navigate = useNavigate();
 
@@ -30,11 +30,20 @@ export default function Great() {
   //   return true;
   // }
 
+  function isFinished() {
+    for (let { available } of location.state.couples) {
+      if (available) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   function goToNextRoute() {
     if (document.getElementById("great-el")) {
       document.getElementById("great-el").classList.add("slide-out");
     }
-    if (location.state.couples.length === MAX_COUPLES) {
+    if (isFinished()) {
       navigate("/preferido", {
         state: location.state,
         replace: true

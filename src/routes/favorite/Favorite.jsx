@@ -35,7 +35,12 @@ export default function Favorite() {
           localName ===
           Object.keys(
             Object.keys(location.state.objectsTable)
-              .map((val) => [val, location.state.objectsTable[val]])
+              .map((val) => [
+                val,
+                (location.state.objectsTable[val].chosen /
+                  location.state.objectsTable[val].showed) *
+                  100,
+              ])
               .sort((val1, val2) => val2[1] - val1[1])
               .map((val) => {
                 return { [val[0]]: val[1] };
@@ -69,7 +74,7 @@ export default function Favorite() {
     }
     navigate("/tabela", {
       state: location.state,
-      replace: true
+      replace: true,
     });
   }
 

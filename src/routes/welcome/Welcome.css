@@ -1,0 +1,50 @@
+#wel-el {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#wel-head-tit {
+  margin-left: 5vw;
+  margin-bottom: 30px;
+}
+.wel-question {
+  font-family: "Inter", sans-serif;
+  font-size: 55pt;
+  font-weight: bold;
+  text-align: center;
+  color: #424242;
+  margin-bottom: -1rem;
+  animation: fade 3s linear;
+}
+@media screen and (max-width: 799px) {
+  .wel-question {
+    font-size: 45pt;
+  }
+}
+@keyframes fade {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.wel-bar {
+  margin-top: 5px;
+  height: 5px;
+  background-color: #91cc8b;
+  width: 80px;
+  animation: fade 3s linear;
+}
+.btn-start {
+  cursor: pointer;
+  color: #91cc8b;
+  width: 100px;
+  height: 100px;
+}
+.btn-start:hover {
+  color: #91cc8bbb;
+}
