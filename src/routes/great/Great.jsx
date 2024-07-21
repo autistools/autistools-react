@@ -43,21 +43,23 @@ export default function Great() {
     if (document.getElementById("great-el")) {
       document.getElementById("great-el").classList.add("slide-out");
     }
-    if (isFinished()) {
-      navigate("/preferido", {
-        state: location.state,
-        replace: true
-      });
-    } else {
-      navigate("/dois", {
-        state: { 
-          forbidden: location.state.index, 
-          couples: location.state.couples,
-          objectsTable: location.state.objectsTable 
-        },
-        replace: true
-      });
-    }
+    setTimeout(() => {
+      if (isFinished()) {
+        navigate("/preferido", {
+          state: location.state,
+          replace: true
+        });
+      } else {
+        navigate("/dois", {
+          state: { 
+            forbidden: location.state.index, 
+            couples: location.state.couples,
+            objectsTable: location.state.objectsTable 
+          },
+          replace: true
+        });
+      }
+    }, 1000);
   }
 
   return (
