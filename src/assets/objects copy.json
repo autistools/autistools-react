@@ -3,6 +3,12 @@
     "path": "batman",
     "file": "batman.gif",
     "name": "Batman",
+    "next": "/moedas"
+  },
+  {
+    "path": "moedas",
+    "file": "moedas.gif",
+    "name": "Moedas",
     "next": "/caminhao"
   },
   {
@@ -21,6 +27,18 @@
     "path": "youtube",
     "file": "youtube.gif",
     "name": "YouTube",
+    "next": "/pintar"
+  },
+  {
+    "path": "pintar",
+    "file": "pintar.gif",
+    "name": "Pintar",
+    "next": "/slime"
+  },
+  {
+    "path": "slime",
+    "file": "slime.png",
+    "name": "Slime",
     "next": "/minecraft"
   },
   {

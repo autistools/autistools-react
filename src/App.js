@@ -12,6 +12,7 @@ import Great from "./routes/great/Great";
 import Table from "./routes/table/Table";
 import Favorite from "./routes/favorite/Favorite";
 import objects from "./assets/objects.json";
+import Absence from "./routes/absence/Absence";
 
 const router = createHashRouter([
   {
@@ -84,7 +85,7 @@ const router = createHashRouter([
       },
       {
         path: "ausencia",
-        element: <Message phrase={"Ausência de escolha"} next={"/dois"} />,
+        element: <Absence />,
       },
       {
         path: "otimo",

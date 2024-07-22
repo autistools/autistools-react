@@ -14,18 +14,6 @@ export default function Two() {
 
   useEffect(() => {
     if (two.length < 2) {
-      // let rand1 = null,
-      //   rand2 = null;
-      // while (
-      //   (rand1 = parseInt(Math.random() * objects.length)) ===
-      //   location.state.forbidden
-      // );
-      // while (
-      //   (rand2 = parseInt(Math.random() * objects.length)) === rand1 ||
-      //   rand2 === location.state.forbidden
-      // );
-      // two.push(objects[rand1], objects[rand2]);
-      // location.state.couples.push(`${rand1} ${rand2}`);
       let couple = location.state.couples.find(
         ({ couple, available }) =>
           couple.indexOf(location.state.forbidden) === -1 && available
@@ -33,8 +21,8 @@ export default function Two() {
       if (!couple) {
         couple = location.state.couples.find(({ available }) => available);
       }
-      couple.available = false;
       two.push(objects[couple.couple[0]], objects[couple.couple[1]]);
+      couple.available = false;
       location.state.objectsTable[objects[couple.couple[0]].name].showed++;
       location.state.objectsTable[objects[couple.couple[1]].name].showed++;
     }
