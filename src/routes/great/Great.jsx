@@ -4,31 +4,11 @@ import Card from "../card/Card";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import { BsArrowRightCircleFill } from "react-icons/bs";
-// import objects from "../../assets/objects.json";
 
 export default function Great() {
-  // const MAX_COUPLES = parseInt(objects.length * (objects.length - 1) / 2);
-  
-  // const MAX_COUPLES = 5;
-
   const navigate = useNavigate();
 
   const location = useLocation();
-
-  // function isFinished(couples) {
-  //   const numbers = objects.map((_, index) => index);
-  //   const combinations = numbers.flatMap((v, i) =>
-  //     numbers.slice(i + 1).map((w) => v + " " + w)
-  //   );
-  //   console.log(numbers)
-  //   console.log(combinations);
-  //   for (let couple of couples) {
-  //     if (combinations.indexOf(couple) === -1) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
 
   function isFinished() {
     for (let { available } of location.state.couples) {
@@ -54,7 +34,9 @@ export default function Great() {
           state: { 
             forbidden: location.state.index, 
             couples: location.state.couples,
-            objectsTable: location.state.objectsTable 
+            objectsTable: location.state.objectsTable,
+            username: location.state.username,
+            age: location.state.age
           },
           replace: true
         });

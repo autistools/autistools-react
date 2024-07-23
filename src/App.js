@@ -1,6 +1,7 @@
 import React, { RouterProvider, createHashRouter } from "react-router-dom";
 import ErrorPage from "./error_page";
 import Base from "./routes/base/Base";
+import Start from "./routes/start/Start";
 import Welcome from "./routes/welcome/Welcome";
 import Age from "./routes/age/Age";
 import Name from "./routes/name/Name";
@@ -21,6 +22,10 @@ const router = createHashRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "comecar",
+        element: <Start />,
+      },
+      {
         path: "seja-bem-vindo",
         element: <Welcome />,
       },
@@ -40,7 +45,7 @@ const router = createHashRouter([
               "Esta é uma atividade para descobrir as suas preferências, aquilo que você mais gosta"
             }
             next={"/conheca"}
-            milli={11000}
+            milli={8000}
           />
         ),
       },
@@ -50,7 +55,7 @@ const router = createHashRouter([
           <Message
             phrase={"Primeiro, quero que você conheça cada um dos objetos"}
             next={"/batman"}
-            milli={9000}
+            milli={8000}
           />
         ),
       },

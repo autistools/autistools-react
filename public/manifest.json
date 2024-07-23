@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "AutisTools",
+  "name": "AIP para crianças do espectro autista",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,14 +8,14 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "jmt1.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "293x293"
     },
     {
-      "src": "logo512.png",
+      "src": "jmt2.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "408x576"
     }
   ],
   "start_url": ".",

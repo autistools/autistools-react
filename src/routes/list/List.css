@@ -27,9 +27,10 @@
   margin: auto;
   list-style: none;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   word-wrap: break-word;
   padding: 0 5rem 0 5rem;
   gap: 25px;

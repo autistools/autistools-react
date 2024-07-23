@@ -26,22 +26,27 @@ export default function Base() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate("/seja-bem-vindo", { replace: true });
+    navigate("/comecar", { replace: true });
   }, [navigate]);
 
   const audioElement = () => document.getElementById("audio-element");
 
   useEffect(() => {
-    audioElement().src = audios[pathname.slice(1)];
-    setEnded(false);
-  }, [setEnded, pathname, volume]);
+    if (audios[pathname.slice(1)]) {
+      audioElement().src = audios[pathname.slice(1)];
+      if (navigator.userActivation.hasBeenActive) {  // Prevent Autoplay policy errors in modern browsers.
+        audioElement().play();
+      }
+      setEnded(false);
+    }
+  }, [setEnded, pathname]);
 
   function toggleVolume() {
     if (!ended) {
       if (volume) {
-        audioElement().pause();
+        audioElement().muted = true;
       } else {
-        audioElement().play();
+        audioElement().muted = false;
       }
     }
     setVolume((volume) => !volume);
@@ -50,15 +55,16 @@ export default function Base() {
   return (
     <div id="base-el">
       <header id="heading-el">
-        <audio
-          id="audio-element"
-          onEnded={() => setEnded(true)}
-          preload="auto"
-          autoPlay={volume ? true : false}
-          loop={false}
-        >
-          <source src={audios["idade"]} type="audio/mpeg" />
-        </audio>
+        {audios[pathname.slice(1)] ? (
+          <audio
+            id="audio-element"
+            onEnded={() => setEnded(true)}
+            preload="auto"
+            loop={false}
+          >
+            <source src={audios[pathname.slice(1)]} type="audio/mpeg" />
+          </audio>
+        ) : null}
         <h1 className="app-name">AutisTools</h1>
         <a href="https://juntos.art.br/" target="_blank" rel="noreferrer">
           <img

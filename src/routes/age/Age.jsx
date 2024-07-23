@@ -16,7 +16,7 @@ export default function Age() {
       if (parsed <= 0 || parsed > 50) {
         throw Error("Invalid age");
       }
-      setAge(parsed);
+      setAge(parsed.toString());
     } catch (err) {
       setAge("");
       ageRef.current.focus();
@@ -31,9 +31,18 @@ export default function Age() {
         .addEventListener("keypress", (event) => {
           if (event.key === "Enter") {
             event.preventDefault();
-            if (age) {
+            if (age.trim() && document.getElementById("age-el")) {
               document.getElementById("age-el").classList.add("slide-out");
-              setTimeout(() => navigate("/nome", { replace: true }), 1000);
+              setTimeout(
+                () =>
+                  navigate("/nome", {
+                    state: {
+                      age: age.trim(),
+                    },
+                    replace: true,
+                  }),
+                1000
+              );
             }
           }
         });
@@ -41,9 +50,18 @@ export default function Age() {
   }, [ageRef, age, navigate]);
 
   function goToNextRoute() {
-    if (age) {
+    if (age.trim() && document.getElementById("age-el")) {
       document.getElementById("age-el").classList.add("slide-out");
-      setTimeout(() => navigate("/nome", { replace: true }), 1000);
+      setTimeout(
+        () =>
+          navigate("/nome", {
+            state: {
+              age: age.trim(),
+            },
+            replace: true,
+          }),
+        1000
+      );
     }
   }
 

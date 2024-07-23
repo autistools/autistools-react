@@ -64,7 +64,7 @@ export default function Two() {
       });
     }, 1000);
   }
-
+  
   return (
     <div id="two-el" className="slide-in">
       <div className="two-question-div">

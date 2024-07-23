@@ -57,7 +57,8 @@ export default function Table() {
       type: "text/csv",
     });
     let tempLink = document.createElement("a");
-    tempLink.download = "tabela.csv";
+    let username = location.state.username.trim().split(" ")[0].toLowerCase();
+    tempLink.download = `tabela_${username}.csv`;
     let url = window.URL.createObjectURL(csvFile);
     tempLink.href = url;
     tempLink.style.display = "none";
@@ -67,7 +68,7 @@ export default function Table() {
     const worksheet = XLSX.utils.json_to_sheet(xlsxData); // Download XLSX.
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Tabela 1");
-    XLSX.writeFile(workbook, "tabela.xlsx");
+    XLSX.writeFile(workbook, `tabela_${username}.xlsx`);
     setTimeout(() => setDownloadTableClicked(false), 2000);
   }
 
@@ -88,12 +89,12 @@ export default function Table() {
   }, [location.state.objectsTable]);
 
   function doAgain() {
-    window.history.replaceState({}, "");
     if (document.getElementById("tab-el")) {
       document.getElementById("tab-el").classList.add("slide-out");
     }
     navigate("/idade", {
       replace: true,
+      state: {}
     });
   }
 
@@ -101,7 +102,8 @@ export default function Table() {
     <div id="tab-el" className="slide-in">
       <div id="tab-head-tit">
         <span className="tab-question">
-          Esses são os resultados do seu teste:
+          Esses são os resultados do seu teste:{" "}
+          {location.state.username.trim().split(" ")[0]}, {location.state.age} anos
         </span>
         <div className="tab-bar"></div>
       </div>

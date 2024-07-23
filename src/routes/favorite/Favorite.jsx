@@ -22,6 +22,7 @@ export default function Favorite() {
   const [favorite, setFavorite] = useState(null);
   const [show, setShow] = useState(false);
   const location = useLocation();
+
   const navigate = useNavigate();
 
   function audioElement() {
@@ -29,25 +30,26 @@ export default function Favorite() {
   }
 
   useEffect(() => {
-    setFavorite(
-      objects.find(
-        ({ name: localName }) =>
-          localName ===
-          Object.keys(
-            Object.keys(location.state.objectsTable)
-              .map((val) => [
-                val,
-                (location.state.objectsTable[val].chosen /
-                  location.state.objectsTable[val].showed) *
-                  100,
-              ])
-              .sort((val1, val2) => val2[1] - val1[1])
-              .map((val) => {
-                return { [val[0]]: val[1] };
-              })[0]
-          )[0]
-      )
+    const keys = Object.keys(location.state.objectsTable);
+    const valPercentageMapping = keys.map((val) => [
+      val,
+      (location.state.objectsTable[val].chosen /
+        location.state.objectsTable[val].showed) *
+        100,
+    ]);
+    const sortedValPercentageMapping = valPercentageMapping.sort(
+      (val1, val2) => val2[1] - val1[1]
     );
+    const sortedValPercentageMappingMapped = sortedValPercentageMapping.map(
+      (val) => {
+        return { [val[0]]: val[1] };
+      }
+    );
+    const firstNameMapped = Object.keys(sortedValPercentageMappingMapped[0])[0];
+    const objFound = objects.find(
+      ({ name: localName }) => localName === firstNameMapped
+    );
+    setFavorite(objFound);
   }, [location.state.objectsTable]);
 
   useEffect(() => {
@@ -57,41 +59,51 @@ export default function Favorite() {
           new URL(audioElement().src).toString() ===
           new URL(audios.preferido, window.location.origin).toString()
         ) {
-          audioElement().src = audios[favorite.path];
-          audioElement().loop = false;
           setShow(true);
-          audioElement().removeEventListener("ended", () => {
-            audioElement().src = audios.preferido;
-          });
+          audioElement().src = audios[favorite.path];
+          audioElement().play();
         }
-      });
+      }, {once : true});
     }
-  }, [favorite, show]);
+  }, [favorite]);
 
   function goToTable() {
     if (document.getElementById("fav-el")) {
       document.getElementById("fav-el").classList.add("slide-out");
     }
-    navigate("/tabela", {
-      state: location.state,
-      replace: true,
-    });
+    if (document.getElementById("fav-el")) {
+      document.getElementById("fav-el").classList.remove("slide-out");
+    }
+    setTimeout(() => {
+      navigate("/tabela", {
+        state: location.state,
+        replace: true,
+      });
+    }, 1000);
   }
 
   function doAgain() {
-    window.history.replaceState({}, "");
     if (document.getElementById("fav-el")) {
       document.getElementById("fav-el").classList.add("slide-out");
     }
-    navigate("/idade", {
-      replace: true,
-    });
+    setTimeout(() => {
+      if (document.getElementById("fav-el")) {
+        document.getElementById("fav-el").classList.remove("slide-out");
+      }
+      navigate("/idade", {
+        replace: true,
+        state: {},
+      });
+    }, 1000);
   }
 
   return (
     <div id="fav-el" className="slide-in">
       <div id="fav-head-tit">
-        <span className="fav-question">O seu objeto preferido é:</span>
+        <span className="fav-question">
+          {location.state.username.trim().split(" ")[0]}, o seu objeto preferido
+          é:
+        </span>
         <div className="fav-bar"></div>
       </div>
       {show ? (

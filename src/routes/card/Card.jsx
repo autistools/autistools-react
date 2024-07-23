@@ -1,33 +1,35 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import "./Card.css";
 
 export default function Card({
   file,
   name,
-  next=null,
+  next = null,
   navigable = true,
-  millis = 5000,
+  millis = 3000,
   clickable = false,
   onClick = null,
 }) {
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (next && navigable) {
       setTimeout(() => {
-        if (document.getElementById('card-el')) {
-          document.getElementById('card-el').classList.add('slide-out');
+        if (document.getElementById("card-el")) {
+          document.getElementById("card-el").classList.add("slide-out");
         }
         setTimeout(() => {
-          if (document.getElementById('card-el')) {
-            document.getElementById('card-el').classList.remove('slide-out');
+          if (document.getElementById("card-el")) {
+            document.getElementById("card-el").classList.remove("slide-out");
           }
-          navigate(next, { replace: true });
+          navigate(next, { state: location.state, replace: true });
         }, 1000);
       }, millis);
     }
-  }, [next, navigable, millis, navigate]);
+  }, [next, navigable, millis, navigate, location]);
 
   return (
     <div id="card-el" className="slide-in">
@@ -39,8 +41,8 @@ export default function Card({
                 cursor: "pointer",
               }
             : {
-              cursor: "default"
-            }
+                cursor: "default",
+              }
         }
         onClick={() => {
           if (clickable && onClick) {

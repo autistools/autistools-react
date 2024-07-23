@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import "./List.css";
 import objects from "../../assets/objects.json";
 import Card from "../card/Card";
 
 export default function List() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [index, setIndex] = useState(1);
   const [clickable, setClickable] = useState(false);
 
@@ -43,6 +44,7 @@ export default function List() {
     setTimeout(() => {
       navigate("/preparacao", {
         state: {
+          ...location.state,
           forbidden: favorite.index,
           couples: couples,
           objectsTable: objectsTable,
